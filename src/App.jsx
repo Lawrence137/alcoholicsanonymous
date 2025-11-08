@@ -1,12 +1,23 @@
-import './App.css'
+import Navbar from './components/Navbar';
+import Hero from './components/Hero';
+import About from './components/About';
+import Steps from './components/Steps';
+import Resources from './components/Resources';
+import Footer from './components/Footer';
+import './App.css';
 
 function App() {
-
   return (
-    <>
-    <h1 className="text-4xl font-bold bg-red-500">Alcoholics Anonymous</h1>
-    </>
-  )
+    <div className="min-h-screen bg-gray-100">
+      <Navbar />
+      <Hero />
+      <About />
+      <Steps />
+      <Resources />
+      <Footer />
+    </div>
+  );
 }
 
-export default App
+export default App;
+
