@@ -34,20 +34,20 @@ export default function Navbar() {
 
       {/* Mobile Menu */}
       <div
-        className={`fixed inset-y-0 left-0 w-64 bg-white z-50 transform ${
+        className={`fixed inset-y-0 left-0 w-64 bg-blue-600 z-50 transform ${
           isOpen ? 'translate-x-0' : '-translate-x-full'
         } transition-transform duration-300 ease-in-out md:hidden`}
       >
         <div className="flex justify-end p-4">
-          <button onClick={toggleMenu} className="text-gray-800 focus:outline-none">
+          <button onClick={toggleMenu} className="text-white focus:outline-none">
             <FaTimes className="h-6 w-6" />
           </button>
         </div>
         <nav className="flex flex-col items-center space-y-4 mt-8">
-          <a href="#hero" className="text-gray-800 hover:text-blue-600 text-lg" onClick={toggleMenu}>Home</a>
-          <a href="#about" className="text-gray-800 hover:text-blue-600 text-lg" onClick={toggleMenu}>About</a>
-          <a href="#steps" className="text-gray-800 hover:text-blue-600 text-lg" onClick={toggleMenu}>The Steps</a>
-          <a href="#resources" className="text-gray-800 hover:text-blue-600 text-lg" onClick={toggleMenu}>Resources</a>
+          <a href="#hero" className="text-white hover:text-gray-200 text-lg" onClick={toggleMenu}>Home</a>
+          <a href="#about" className="text-white hover:text-gray-200 text-lg" onClick={toggleMenu}>About</a>
+          <a href="#steps" className="text-white hover:text-gray-200 text-lg" onClick={toggleMenu}>The Steps</a>
+          <a href="#resources" className="text-white hover:text-gray-200 text-lg" onClick={toggleMenu}>Resources</a>
         </nav>
       </div>
     </nav>
