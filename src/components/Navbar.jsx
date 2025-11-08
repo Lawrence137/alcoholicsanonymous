@@ -1,13 +1,35 @@
 // src/components/Navbar.jsx
-import { useState } from 'react';
+import { useState, useRef, useEffect } from 'react';
 import { FaBars, FaTimes } from 'react-icons/fa';
 
 export default function Navbar() {
   const [isOpen, setIsOpen] = useState(false);
+  const navRef = useRef();
 
   const toggleMenu = () => {
     setIsOpen(!isOpen);
   };
+
+  // Close menu on click outside
+  useEffect(() => {
+    const handleClickOutside = (event) => {
+      if (navRef.current && !navRef.current.contains(event.target) && isOpen) {
+        // Check if the click was not on the hamburger button itself
+        const hamburgerButton = document.querySelector('.md\\:hidden > button');
+        if (hamburgerButton && !hamburgerButton.contains(event.target)) {
+          setIsOpen(false);
+        }
+      }
+    };
+
+    if (isOpen) {
+      document.addEventListener('mousedown', handleClickOutside);
+    }
+
+    return () => {
+      document.removeEventListener('mousedown', handleClickOutside);
+    };
+  }, [isOpen]);
 
   return (
     <nav className="bg-white shadow-md fixed w-full z-10">
@@ -26,14 +48,25 @@ export default function Navbar() {
 
         {/* Mobile Menu Button */}
         <div className="md:hidden">
-          <button onClick={toggleMenu} className="text-gray-800 focus:outline-none">
-            <FaBars className="h-6 w-6" />
-          </button>
+          {!isOpen && (
+            <button onClick={toggleMenu} className="text-gray-800 focus:outline-none">
+              <FaBars className="h-6 w-6" />
+            </button>
+          )}
         </div>
       </div>
 
+      {/* Overlay for blur effect and click outside */}
+      {isOpen && (
+        <div
+          className="fixed inset-0 bg-black bg-opacity-50 backdrop-blur-sm z-40 md:hidden"
+          onClick={() => setIsOpen(false)}
+        ></div>
+      )}
+
       {/* Mobile Menu */}
       <div
+        ref={navRef}
         className={`fixed inset-y-0 left-0 w-64 bg-blue-600 z-50 transform ${
           isOpen ? 'translate-x-0' : '-translate-x-full'
         } transition-transform duration-300 ease-in-out md:hidden`}
